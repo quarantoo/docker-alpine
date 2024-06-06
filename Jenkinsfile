@@ -11,7 +11,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('alpine:latest')
+                    // Build Docker image
+                    def dockerImage = docker.build('alpine:latest')
                 }
             }
         }
@@ -19,8 +20,14 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
+                    // Push Docker image to Docker Hub
                     docker.withRegistry('https://hub.docker.com/', 'ff1a2c83-1f74-45dd-b49b-afc68d7d460a') {
-                        docker.image('alpine:latest').push('latest')
+                        // Tag the Docker image
+                        def dockerImage = docker.image('alpine:latest')
+                        dockerImage.tag('latest')
+                        
+                        // Push the tagged image
+                        dockerImage.push('latest')
                     }
                 }
             }
