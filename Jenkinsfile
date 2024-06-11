@@ -11,26 +11,17 @@ pipeline {
             steps {
                 // Your build steps here
                 // Example: docker build -t "alpine:latest" .
-                bat 'docker build -t "alpine:latest" .'
+                bat 'docker build -t d32saurav339/alpine:latest .'
             }
         }
         stage('Push Docker Image') {
             steps {
                 // Login to Docker Hub
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/') {
                         bat 'docker login -u d32saurav339 -p Saurav@389421'
+                        bat 'docker push d32saurav339/alpine:latest
                     }
-                }
-                // Tag the Docker image
-                script {
-                    docker.tag('alpine:latest', 'd32saurav339/library:alpine')
-                }
-                // Push the Docker image
-                script {
-                    docker.image('d32saurav339/library:alpine').push()
                 }
             }
         }
     }
-}
