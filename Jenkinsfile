@@ -15,6 +15,9 @@ pipeline {
             }
         }
         stage('Push Docker Image') {
+            environment {
+                DOCKER_IMAGE = docker.build("d32saurav339/library:alpine")
+            }
             steps {
                 // Login to Docker Hub
                 script {
@@ -22,13 +25,9 @@ pipeline {
                         bat 'docker login -u d32saurav339 -p Saurav@389421'
                     }
                 }
-                // Tag the Docker image
-                script {
-                    docker.tag('alpine:latest', 'd32saurav339/library:alpine')
-                }
                 // Push the Docker image
                 script {
-                    docker.image('d32saurav339/library:alpine').push()
+                    DOCKER_IMAGE.push()
                 }
             }
         }
