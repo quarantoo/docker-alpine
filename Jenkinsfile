@@ -18,7 +18,7 @@ pipeline {
             steps {
                 // Login to Docker Hub
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerCredentialsId') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'ff1a2c83-1f74-45dd-b49b-afc68d7d460a') {
                         bat 'docker login -u d32saurav339 -p Saurav@389421'
                     }
                 }
