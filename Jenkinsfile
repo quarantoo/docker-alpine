@@ -19,7 +19,7 @@ pipeline {
                 // Login to Docker Hub
                 script {
                         bat 'docker login -u d32saurav339 -p Saurav@389421'
-                        bat 'docker push d32saurav339/alpine:latest
+                        bat 'docker push d32saurav339/alpine:latest'
                     }
                 }
             }
